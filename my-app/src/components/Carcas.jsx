@@ -2,7 +2,7 @@ import circle from '../assets/circles.svg'
 import backStyle from '../assets/backstyle.svg'
 import {useState} from "react";
 import Success from "./Success.jsx";
-import {handleSubmit} from "./Regex.jsx";
+import {handleRegex} from "./Regex.jsx";
 
 
 const Carcas = () => {
@@ -14,9 +14,8 @@ const Carcas = () => {
     const [cvc, setCvc] = useState(0)
 
 
-
     function handleName(object) {
-        if(object.target.value.length > 20){
+        if (object.target.value.length > 20) {
             object.target.value = object.target.value.substring(0, 20)
         }
         setName(object.target.value)
@@ -28,25 +27,54 @@ const Carcas = () => {
         }
         setMonth(object.target.value);
     }
+
     function handleYear(object) {
         if (object.target.value.length > object.target.maxLength) {
             object.target.value = object.target.value.slice(0, object.target.maxLength)
         }
         setYear(object.target.value);
     }
+
     function handleCvc(object) {
         if (object.target.value.length > object.target.maxLength) {
             object.target.value = object.target.value.slice(0, object.target.maxLength)
         }
         setCvc(object.target.value);
     }
+
     function handleCard(object) {
-        if (object.target.value.length > object.target.maxLength){
+        if (object.target.value.length > object.target.maxLength) {
             object.target.value = object.target.value.slice(0, object.target.maxLength)
         }
         const format = object.target.value.replace(/(.{4})/g, '$1 ').trim();
 
         setCard(format);
+    }
+
+    function handleStorage() {
+    const cardInfo = {
+            name: name,
+            card: card,
+            month: month,
+            year: year,
+            cvc: cvc,
+        }
+        localStorage.setItem('card', JSON.stringify(cardInfo))
+    }
+    handleStorage();
+
+    localStorage.setItem('theme', 'white');
+
+    function handleToggle(){
+        const background = document.getElementsByClassName('carcass-right');
+        const theme = localStorage.getItem('theme');
+
+        const newTheme = theme === 'white' ? `black` : `white`;
+
+        localStorage.setItem('theme', newTheme);
+
+        localStorage.getItem('theme') === 'white' ? `${background.style.backgroundColor='white'}` : `${background.style.backgroundColor = 'black'}`
+
     }
 
 
@@ -83,7 +111,7 @@ const Carcas = () => {
 
 
                 <div className='carcass-right'>
-                    <form id='form' onSubmit={handleSubmit}>
+                    <form id='form' onSubmit={handleRegex}>
 
                         <div className='box'>
                             <label>CARDHOLDER NAME</label>
@@ -117,6 +145,8 @@ const Carcas = () => {
 
                     </form>
                     <Success/>
+
+                    <button id='toggle' onClick={handleToggle} style={{position:'absolute',top:'12px',right:'12px'}}>Theme</button>
 
                 </div>
             </div>

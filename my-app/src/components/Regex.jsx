@@ -1,4 +1,5 @@
-export function handleSubmit(e) {
+
+export function handleRegex(e) {
     e.preventDefault();
 
     const nameInput = document.getElementById("name");
