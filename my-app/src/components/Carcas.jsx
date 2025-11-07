@@ -1,6 +1,6 @@
 import circle from '../assets/circles.svg'
 import backStyle from '../assets/backstyle.svg'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Success from "./Success.jsx";
 import {handleRegex} from "./Regex.jsx";
 
@@ -63,19 +63,30 @@ const Carcas = () => {
     }
     handleStorage();
 
-    localStorage.setItem('theme', 'white');
+    const [background, setBackground] = useState('')
 
-    function handleToggle(){
-        const background = document.getElementsByClassName('carcass-right');
-        const theme = localStorage.getItem('theme');
+    useEffect(() => {
+        const theme = localStorage.getItem('theme') || 'light';
+        const backgroundColor = theme === 'light' ? 'white' : 'blue'
+        setBackground(backgroundColor);
+    }, []);
 
-        const newTheme = theme === 'white' ? `black` : `white`;
-
+    function handleToggle() {
+        const theme = localStorage.getItem('theme') || 'light';
+        const newTheme =  theme === 'light' ? 'dark' : 'light';
+        const backgroundCol = newTheme === 'light' ? 'white' : 'black';
+        setBackground(backgroundCol);
         localStorage.setItem('theme', newTheme);
-
-        localStorage.getItem('theme') === 'white' ? `${background.style.backgroundColor='white'}` : `${background.style.backgroundColor = 'black'}`
-
     }
+
+    const input = document.querySelectorAll('input');
+    input.forEach((input) => {
+        if(input.value.trim() !== ''){
+            input.style.opacity = '1'
+        }else{
+            input.style.opacity = '0.25'
+        }
+    })
 
 
 
@@ -110,7 +121,7 @@ const Carcas = () => {
                 </div>
 
 
-                <div className='carcass-right'>
+                <div className='carcass-right' style={{backgroundColor:background}}>
                     <form id='form' onSubmit={handleRegex}>
 
                         <div className='box'>
