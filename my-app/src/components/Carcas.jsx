@@ -15,8 +15,9 @@ const Carcas = () => {
 
 
     function handleName(object) {
+        object.target.value = object.target.value.replace(/[^a-zA-Z\s]/g, '');
         if (object.target.value.length > 20) {
-            object.target.value = object.target.value.substring(0, 20)
+            object.target.value = object.target.value.slice(0, 20)
         }
         setName(object.target.value)
     }
@@ -132,7 +133,7 @@ const Carcas = () => {
 
                         <div className='box'>
                             <label>CARD NUMBER</label>
-                            <input id='card' maxLength='16' type='number' placeholder='e.g. 1234 5678 9123 0000' onChange={handleCard}/>
+                            <input id='card' maxLength={16} type='number' placeholder='e.g. 1234 5678 9123 0000' onChange={handleCard}/>
                             <p className='regWrong' id='cardWrong'>Wrong format,letters only</p>
                         </div>
 
@@ -140,14 +141,14 @@ const Carcas = () => {
                             <div className='box2'>
                                 <label>Exp. Date (MM/YY)</label>
                                 <div className='input-container'>
-                                    <input id='month' max='12' maxLength='2' type='number' placeholder='MM' onChange={handleMonth}/>
-                                    <input id='year' maxLength='2' type='number' placeholder='YY' onChange={handleYear}/>
+                                    <input id='month' max='12' maxLength={2} type='number' placeholder='MM' onChange={handleMonth}/>
+                                    <input id='year' maxLength={2} type='number' placeholder='YY' onChange={handleYear}/>
                                 </div>
                                 <p className='regWrong' id='dateWrong'>Wrong format</p>
                             </div>
                             <div className='box2'>
                                 <label>CVC</label>
-                                <input id='cvc' maxLength='3' type='number' placeholder='e.g. 123' onChange={handleCvc}/>
+                                <input id='cvc' maxLength={3} type='number' placeholder='e.g. 123' onChange={handleCvc}/>
                                 <p className='regWrong' id='cvcWrong'>Wrong format</p>
                             </div>
                         </div>
