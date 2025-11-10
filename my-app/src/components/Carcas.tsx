@@ -1,20 +1,20 @@
 import circle from '../assets/circles.svg'
 import backStyle from '../assets/backstyle.svg'
 import {useEffect, useState} from "react";
-import Success from "./Success.jsx";
-import {handleRegex} from "./Regex.jsx";
+import Success from "./Success.js";
+import {handleRegex} from "./Regex.js";
 
 
 const Carcas = () => {
 
     const [name, setName] = useState('');
-    const [card, setCard] = useState('')
+    const [card, setCard] = useState(0)
     const [month, setMonth] = useState(0)
     const [year, setYear] = useState(0)
     const [cvc, setCvc] = useState(0)
 
 
-    function handleName(object) {
+    function handleName(object:any) {
         object.target.value = object.target.value.replace(/[^a-zA-Z\s]/g, '');
         if (object.target.value.length > 20) {
             object.target.value = object.target.value.slice(0, 20)
@@ -22,32 +22,32 @@ const Carcas = () => {
         setName(object.target.value)
     }
 
-    function handleMonth(object) {
+    function handleMonth(object:any) {
         if (object.target.value.length > object.target.maxLength) {
             object.target.value = object.target.value.slice(0, object.target.maxLength)
         }
         setMonth(object.target.value);
     }
 
-    function handleYear(object) {
+    function handleYear(object:any) {
         if (object.target.value.length > object.target.maxLength) {
             object.target.value = object.target.value.slice(0, object.target.maxLength)
         }
         setYear(object.target.value);
     }
 
-    function handleCvc(object) {
+    function handleCvc(object:any) {
         if (object.target.value.length > object.target.maxLength) {
             object.target.value = object.target.value.slice(0, object.target.maxLength)
         }
         setCvc(object.target.value);
     }
 
-    function handleCard(object) {
+    function handleCard(object:any) {
         if (object.target.value.length > object.target.maxLength) {
             object.target.value = object.target.value.slice(0, object.target.maxLength)
         }
-        const format = object.target.value.replace(/(.{4})/g, '$1 ').trim();
+        const format:number = object.target.value.replace(/(.{4})/g, '$1 ').trim();
 
         setCard(format);
     }
@@ -67,15 +67,15 @@ const Carcas = () => {
     const [background, setBackground] = useState('')
 
     useEffect(() => {
-        const theme = localStorage.getItem('theme') || 'light';
-        const backgroundColor = theme === 'light' ? 'white' : 'blue'
+        const theme:string = localStorage.getItem('theme') || 'light';
+        const backgroundColor:string = theme === 'light' ? 'white' : 'blue'
         setBackground(backgroundColor);
     }, []);
 
     function handleToggle() {
-        const theme = localStorage.getItem('theme') || 'light';
-        const newTheme =  theme === 'light' ? 'dark' : 'light';
-        const backgroundCol = newTheme === 'light' ? 'white' : 'black';
+        const theme:string = localStorage.getItem('theme') || 'light';
+        const newTheme:string =  theme === 'light' ? 'dark' : 'light';
+        const backgroundCol:string = newTheme === 'light' ? 'white' : 'black';
         setBackground(backgroundCol);
         localStorage.setItem('theme', newTheme);
     }
