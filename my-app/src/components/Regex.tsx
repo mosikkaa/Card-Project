@@ -27,11 +27,14 @@ export function handleRegex(e:any) {
     const checkYear :boolean= yearRegex.test(yearInput.value)
     const checkCvc:boolean = cvcRegex.test(cvcInput.value)
 
+    let isValid:boolean = true
+
 
 
     if(!checkName){
         nameWrong.style.display = 'flex'
         nameWrong.innerText = 'Please enter a valid name.'
+        isValid = false
     }else{
         nameWrong.style.display = 'none'
     }
@@ -40,6 +43,7 @@ export function handleRegex(e:any) {
     if(!checkCard){
         cardWrong.style.display = 'flex'
         cardWrong.innerText = 'Please enter a valid card number.'
+        isValid = false
     }else{
         cardWrong.style.display = 'none'
     }
@@ -48,6 +52,7 @@ export function handleRegex(e:any) {
     if(!checkMonth || !checkYear){
         dateWrong.style.display = 'flex'
         dateWrong.innerText = 'Enter valid date.'
+        isValid = false
     }else{
         dateWrong.style.display = 'none'
     }
@@ -56,6 +61,7 @@ export function handleRegex(e:any) {
     if(!checkCvc){
         cvcWrong.style.display = 'flex'
         cvcWrong.innerText = 'Enter valid number.'
+        isValid = false
     }else{
         cvcWrong.style.display = 'none'
     }
@@ -65,5 +71,7 @@ export function handleRegex(e:any) {
     if(checkName && checkMonth && checkYear && checkCvc && checkCvc){
         form.style.display = 'none'
         successfull.style.display = 'flex'
+        isValid = true
     }
+    return isValid;
 }

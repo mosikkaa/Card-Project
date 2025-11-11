@@ -17,15 +17,14 @@ input{
     font-weight: 500;
     font-size: 18px;
     line-height: 100%;
-    opacity: 25%;
+    opacity: 0.25;
     padding: 8px 12px;
     border: 1px solid gray;
     border-radius: 8px;
 }
-input:focus{
-    border: 1px solid transparent;
-    border-image: linear-gradient(163.95deg, #6348FE 4.74%, #610595 88.83%);
-    opacity: 100%;
+input:focus,
+input:not(:placeholder-shown){
+    opacity: 1;
     color:rgba(33, 9, 47, 1);
 }
 input[type=number]::-webkit-inner-spin-button,
